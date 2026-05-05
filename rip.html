@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Deletion – Celestial Corsairs</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=IM+Fell+English:ital@0;1&family=Pirata+One&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0a0c1a;
+      --deep: #060810;
+      --moon: #c8d8f0;
+      --gold: #d4a843;
+      --fog:  #7a8eaa;
+      --ink:  #e8eef8;
+      --glow: #4a6fa5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--deep);
+      color: var(--ink);
+      font-family: 'IM Fell English', Georgia, serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Stars */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 40%, #cde 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 8%,  #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 30%, #cde 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 18%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 80% 5%,  #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 45%, #cde 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 65%, #fff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 60% 55%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 80%, #cde 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 70%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 5%  90%, #cde 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 92%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 85%, #cde 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0%   { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* Moon */
+    .moon {
+      position: fixed;
+      top: 40px;
+      right: 80px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 38%, #e8f0ff, #c0d0ee 50%, #8090bb);
+      box-shadow: 0 0 40px 10px rgba(160,190,240,0.25), 0 0 80px 20px rgba(100,130,200,0.12);
+      animation: moonpulse 8s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    @keyframes moonpulse {
+      0%   { box-shadow: 0 0 40px 10px rgba(160,190,240,0.25), 0 0 80px 20px rgba(100,130,200,0.12); }
+      100% { box-shadow: 0 0 60px 20px rgba(160,190,240,0.4),  0 0 120px 40px rgba(100,130,200,0.2); }
+    }
+
+    /* Waves at bottom */
+    .waves {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(180deg, transparent, rgba(10,20,50,0.9));
+      z-index: 1;
+    }
+    .waves::before {
+      content: '〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰';
+      position: absolute;
+      bottom: 30px;
+      left: -20px;
+      color: rgba(74,111,165,0.3);
+      font-size: 2rem;
+      letter-spacing: -4px;
+      animation: wave 4s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes wave {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-60px); }
+    }
+
+    /* Layout */
+    .scroll-container {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 32px 120px;
+    }
+
+    /* Rope border effect */
+    .parchment {
+      background: linear-gradient(160deg, rgba(15,20,40,0.95), rgba(8,12,28,0.98));
+      border: 2px solid rgba(212,168,67,0.3);
+      border-radius: 4px;
+      padding: 52px 56px;
+      position: relative;
+      box-shadow:
+        0 0 0 6px rgba(212,168,67,0.07),
+        0 0 0 8px rgba(212,168,67,0.04),
+        0 20px 80px rgba(0,0,0,0.8),
+        inset 0 0 60px rgba(74,111,165,0.05);
+    }
+    .parchment::before, .parchment::after {
+      content: '⚓';
+      position: absolute;
+      font-size: 1.4rem;
+      color: var(--gold);
+      opacity: 0.5;
+    }
+    .parchment::before { top: 16px; left: 20px; }
+    .parchment::after  { bottom: 16px; right: 20px; }
+
+    /* Corner anchors */
+    .corner { position: absolute; font-size: 1.2rem; color: var(--gold); opacity: 0.4; }
+    .corner.tr { top: 16px; right: 20px; }
+    .corner.bl { bottom: 16px; left: 20px; }
+
+    /* Header */
+    .skull { text-align: center; font-size: 2.5rem; margin-bottom: 12px; filter: drop-shadow(0 0 8px rgba(200,216,240,0.4)); }
+
+    h1 {
+      font-family: 'Pirata One', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--gold);
+      text-align: center;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      text-shadow: 0 0 20px rgba(212,168,67,0.4), 0 2px 4px rgba(0,0,0,0.8);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      text-align: center;
+      color: var(--fog);
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    .divider {
+      text-align: center;
+      color: var(--gold);
+      opacity: 0.5;
+      letter-spacing: 8px;
+      margin: 32px 0;
+      font-size: 0.85rem;
+    }
+
+    h2 {
+      font-family: 'Pirata One', cursive;
+      color: var(--moon);
+      font-size: 1.25rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+      text-shadow: 0 0 12px rgba(200,216,240,0.3);
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #c8d4e8;
+      margin-bottom: 28px;
+    }
+
+    p em { color: var(--moon); font-style: italic; }
+    p strong { color: var(--gold); font-weight: normal; }
+
+    /* Deletion box */
+    .deletion-box {
+      border: 1px solid rgba(212,168,67,0.35);
+      background: rgba(212,168,67,0.04);
+      border-radius: 3px;
+      padding: 28px 32px;
+      margin: 36px 0;
+    }
+    .deletion-box h2 { margin-bottom: 14px; }
+    .deletion-box p  { margin-bottom: 0; }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,168,67,0.3);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    a:hover { color: var(--moon); border-color: var(--moon); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      color: var(--fog);
+      font-style: italic;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    .footer .ship { font-size: 1.4rem; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 6px rgba(74,111,165,0.5)); }
+
+    /* Fade-in animation */
+    .parchment { animation: fadeup 1.2s ease both; }
+    @keyframes fadeup {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="moon"></div>
+  <div class="waves"></div>
+
+  <div class="scroll-container">
+    <div class="parchment">
+      <span class="corner tr">⚓</span>
+      <span class="corner bl">⚓</span>
+
+      <div class="skull">☽ 🏴‍☠️ ☾</div>
+      <h1>The Mare of Night's Eternal Tide</h1>
+      <p class="subtitle">~ A Pirate's Decree Regarding the Scrolls of Your Data ~</p>
+
+      <div class="divider">✦ ✦ ✦</div>
+
+      <h2>I. The Legend of the Mare in the Dark Waters</h2>
+      <p>
+        Harken, ye brave souls who sail the ink-black seas beneath the twilight sky! It be said among
+        the ancient corsairs that <em>Mare of the Night</em> rides the deep swells when the last lantern
+        fades and the moon hangs heavy like a doubloon cast into a bottomless trench. She gallops across
+        the churning foam, her mane a cascade of midnight stars, her hooves striking sparks upon the
+        crests of waves that no mortal ship dare cross alone. <strong>Her legend is as old as the first
+        sailor who ever dared look up and reckon by the stars.</strong>
+      </p>
+
+      <h2>II. When Twilight Spreads Her Crimson Sails</h2>
+      <p>
+        In the hour between the dying sun and the rising dark, when the horizon bleeds in shades of
+        violet and amber — that be <em>Twilight's hour</em>. The corsairs of the Celestial Fleet lower
+        their voices then, for it is whispered that the Mare speaks through the fading light itself.
+        <strong>Her words come not in thunder, but in the hush of a wave retreating from the shore</strong>,
+        pulling secrets and forgotten names back into the deep. Many a sailor has glimpsed her silhouette
+        against that bruised and burning sky, standing proud upon a crest, eyes like twin silver moons,
+        watching — always watching — as the world surrenders its colours to the night.
+      </p>
+
+      <h2>III. The Oath of the Nocturnal Brotherhood</h2>
+      <p>
+        The Corsairs who sail under the <em>Banner of the Crescent Moon</em> swear an oath upon their
+        first twilight at sea: that no treasure plundered from the depths shall be hoarded beyond its
+        worth, and no name written in the ship's log shall remain there longer than the voyage demands.
+        <strong>What is taken may be returned. What is recorded may be struck from the ledger.</strong>
+        This is the Mare's own law — older than any king's decree — and the pirates of the Night Tide
+        honour it above all edicts of the waking world.
+      </p>
+
+      <div class="divider">⚓ ⚓ ⚓</div>
+
+      <div class="deletion-box">
+        <h2>⚔ The Rite of Data Deletion ⚔</h2>
+        <p>
+          Should ye wish yer name stricken from the ship's manifest and yer particulars cast into the
+          sea, send word to the <strong>Harbourmaster</strong> by post-bird or carrier wave.
+          Dispatch yer petition to
+          <strong><a href="mailto:delete@yourdomain.com">delete@yourdomain.com</a></strong>
+          and include yer pirate alias (username) and the vessel (platform) upon which ye sailed.
+          Within <strong>30 tides</strong> — no more — yer records shall be surrendered to the deep,
+          never to resurface in these waters again. <em>The Mare of Night accepts no half-measures.</em>
+        </p>
+      </div>
+
+      <h2>IV. The Night Knows What the Day Forgets</h2>
+      <p>
+        As the <em>twilight</em> gives way fully to darkness and the Mare gallops free across the heavens,
+        remember this, ye who trusted us with yer passage: the night is not a place of loss, but of
+        <strong>honourable returning</strong>. Every secret kept has a tide that brings it home. Every
+        scroll sealed has a flame that can unseal it. We hold yer data as a ship holds its crew — with
+        care, with purpose, and with the solemn promise that when the voyage ends and ye call for
+        the gangplank, <em>ye shall leave as freely as ye came aboard</em>, with nothing held behind
+        in the hold save the memory of fair winds shared.
+      </p>
+
+      <div class="footer">
+        <span class="ship">⛵</span>
+        May yer sails be full and yer nights be clear.<br/>
+        <em>— The Celestial Corsairs, Keepers of the Night Mare's Covenant —</em>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
