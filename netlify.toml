@@ -9,7 +9,16 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Ensure TikTok verification file is served as plain text
+[[headers]]
+  for = "/tiktok*.txt"
+  [headers.values]
+    Content-Type = "text/plain"
+    Cache-Control = "no-cache"
+
+# Exclude TikTok verification file from catch-all redirect
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  conditions = { NOT = [{ path = "/tiktok*.txt" }] }
