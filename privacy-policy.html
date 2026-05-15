@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Celestial Code LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #7A6030;
+    --deep: #04060F;
+    --void: #080C1A;
+    --nebula: #0D1A3A;
+    --star-white: #EEF0FF;
+    --text-dim: #8A92B0;
+    --text-mid: #B8C0D8;
+    --teal-glow: #1AFFE8;
+    --border: rgba(201,168,76,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--star-white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── CANVAS ─── */
+  #starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 5vw;
+    background: linear-gradient(to bottom, rgba(4,6,15,0.98) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .logo-mark {
+    width: 24px; height: 24px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    color: var(--gold);
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 8rem auto 3rem;
+    padding: 0 5vw;
+  }
+
+  .legal-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .legal-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--star-white);
+    margin-bottom: 1rem;
+  }
+
+  .legal-title span { color: var(--gold); }
+
+  .legal-date {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .legal-divider {
+    width: 50px;
+    height: 1px;
+    background: var(--gold-dim);
+    margin: 2rem auto;
+  }
+
+  /* ─── CONTENT ─── */
+  .legal-content {
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+
+  .legal-content section {
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .legal-content section:nth-child(1) { animation-delay: 0.1s; }
+  .legal-content section:nth-child(2) { animation-delay: 0.2s; }
+  .legal-content section:nth-child(3) { animation-delay: 0.3s; }
+  .legal-content section:nth-child(4) { animation-delay: 0.4s; }
+  .legal-content section:nth-child(5) { animation-delay: 0.5s; }
+  .legal-content section:nth-child(6) { animation-delay: 0.6s; }
+  .legal-content section:nth-child(7) { animation-delay: 0.7s; }
+  .legal-content section:nth-child(8) { animation-delay: 0.8s; }
+  .legal-content section:nth-child(9) { animation-delay: 0.9s; }
+
+  .legal-section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .legal-content p {
+    margin-bottom: 1rem;
+  }
+
+  .legal-content ul {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  strong {
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 3rem 5vw;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    margin-top: 5rem;
+  }
+
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--gold-dim);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 4vw; }
+    .nav-logo { font-size: 0.9rem; }
+    main { margin-top: 6rem; }
+    .legal-title { font-size: 1.8rem; }
+    .footer-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="logo-mark">✦</span>
+    Celestial Code
+  </a>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="legal-header">
+    <h1 class="legal-title">Privacy <span>Policy</span></h1>
+    <div class="legal-divider"></div>
+    <p class="legal-date">Last updated: May 15, 2026</p>
+  </div>
+
+  <div class="legal-content">
+    <section>
+      <h2 class="legal-section-title">1. Introduction</h2>
+      <p>Celestial Code LLC ("we," "us," "our," or "Company") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">2. Information We Collect</h2>
+      <p>We may collect information about you in a variety of ways:</p>
+      <ul>
+        <li><strong>Information You Provide:</strong> We collect information you provide directly, such as when you fill out contact forms, schedule meetings, or communicate with us.</li>
+        <li><strong>Automatically Collected Information:</strong> When you visit our website, we may automatically collect certain information about your device, browsing actions, and patterns, including IP addresses, browser type, pages visited, and the time and date of your visit.</li>
+        <li><strong>Cookies and Tracking Technologies:</strong> We use cookies, web beacons, and similar tracking technologies to enhance your experience and gather information about how our website is used.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">3. Use of Information</h2>
+      <p>We use the information we collect for various purposes:</p>
+      <ul>
+        <li>To provide, maintain, and improve our services</li>
+        <li>To respond to your inquiries and fulfill your requests</li>
+        <li>To communicate with you about updates, changes, or new services</li>
+        <li>To monitor and analyze trends, usage, and activities</li>
+        <li>To detect, investigate, and prevent fraudulent transactions and other illegal activities</li>
+        <li>To comply with legal obligations and regulatory requirements</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">4. Sharing of Information</h2>
+      <p>We do not sell, trade, or rent your personal information to third parties. However, we may share information with:</p>
+      <ul>
+        <li>Service providers who assist us in operating our website and conducting our business</li>
+        <li>Law enforcement when required by law</li>
+        <li>Other parties as necessary to comply with legal obligations</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">5. Data Security</h2>
+      <p>We implement appropriate technical and organizational measures designed to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or method of electronic storage is completely secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">6. Your Rights</h2>
+      <p>Depending on your location, you may have certain rights regarding your personal information, including the right to:</p>
+      <ul>
+        <li>Access your personal information</li>
+        <li>Request correction of inaccurate data</li>
+        <li>Request deletion of your data</li>
+        <li>Opt-out of certain data processing activities</li>
+        <li>Data portability</li>
+      </ul>
+      <p>To exercise these rights, please contact us at <strong>bryanhankinsdev@gmail.com</strong></p>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">7. Cookies and Tracking Technologies</h2>
+      <p>We use cookies to enhance your experience on our website. You can control cookie settings through your browser preferences. However, disabling cookies may affect certain functionalities of our website.</p>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">8. Third-Party Links</h2>
+      <p>Our website may contain links to third-party websites. This Privacy Policy applies only to our website. We are not responsible for the privacy practices of other websites. We encourage you to review the privacy policies of any third-party sites before providing your personal information.</p>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">9. Children's Privacy</h2>
+      <p>Our services are not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information and terminate the child's account.</p>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">10. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes by posting the updated policy on our website and updating the "Last updated" date. Your continued use of our website following the posting of revised terms means you accept and agree to the changes.</p>
+    </section>
+
+    <section>
+      <h2 class="legal-section-title">11. Contact Us</h2>
+      <p>If you have questions about this Privacy Policy or our privacy practices, please contact us at <strong>bryanhankinsdev@gmail.com</strong></p>
+    </section>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">✦ Celestial Code LLC</span>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/terms-of-service.html">Terms of Service</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Celestial Code LLC. All rights reserved.</span>
+</footer>
+
+<script>
+  /* ── STARFIELD ── */
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initStars();
+  }
+
+  function initStars() {
+    stars = [];
+    const count = Math.floor((canvas.width * canvas.height) / 6000);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.2,
+        a: Math.random(),
+        speed: Math.random() * 0.4 + 0.05,
+        twinkleOffset: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  let t = 0;
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    t += 0.008;
+    for (const s of stars) {
+      const alpha = 0.3 + 0.5 * Math.sin(t * s.speed + s.twinkleOffset);
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200, 210, 255, ${alpha})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(drawStars);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  drawStars();
+</script>
+
+</body>
+</html>
